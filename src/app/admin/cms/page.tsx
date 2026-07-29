@@ -21,7 +21,7 @@ const INITIAL_FORM_STATE = {
   pains: [
     { pain: '"কী শিখব, কোথা থেকে শুরু করব, এম্বাসিতে কী প্রশ্ন করবে কিছুই বুঝি না। এজেন্সির কাছে গিয়ে ধোঁকা খাই।"', tag: '✅ গাইডলাইন রেডি', solution: 'আমরা পুরো আউটলাইন, চেকলিস্ট আর গাইডলাইন রেডি করেই তোমার সাথে আছি। ফাইল প্রোসেসিং তুমি নিজেই করবে।' },
     { pain: '"ভিসা ইন্টারভিউতে নার্ভাস লাগে, ইংলিশে কথা বলতে ভয় পাই। স্কিল ও কনফিডেন্স নেই।"', tag: '✅ লাইভ মক ইন্টারভিউ', solution: 'আমাদের লাইভ মক ইন্টারভিউ ও স্পোকেন ইংলিশ প্র্যাকটিসের মাধ্যমে তোমার এম্বাসি ফেস করার ভয় পুরোপুরি কেটে যাবে।' },
-    { pain: '"রেগুলারিটি বজায় রাখতে পারি বায় না – মাঝপথেই মোটিভেশন হারিয়ে থেমে যাই।"', tag: '✅ ক্রেজি সাপোর্ট সিস্টেম', solution: 'ডেডিকেটেড লাইভ সাপোর্ট, এসাইনমেন্ট ডেডলাইন ও ২৪/৭ কমিউনিটি সাপোর্টে থেমে যাওয়ার কোনো চান্স নেই।' }
+    { pain: '"রেগুলারিটি বজায় রাখতে পারি বায় না – মাঝপথেই মোটিভেশন হারিয়ে থেমে যাই।"', tag: '✅ ক্রেজি সাপোর্ট সিস্টেম', solution: 'ডেডিকেটেড লাইভ সাপোর্ট, এসাইনমেন্ট ডেডলাইন ও ২৪/৭ কমিউনিটি সাপোর্টে থেমে যাওয়ার কোনো চান্স নেই।' }
   ],
   xFactorSubtitle: 'Why Us?',
   xFactorTitle: 'এই বুটক্যাম্পের X ফ্যাক্টর',
@@ -61,7 +61,7 @@ const INITIAL_FORM_STATE = {
   testimonialsSubtitle: 'যারা আমাদের গাইডলাইন ফলো করে নিজেদের ভয়কে জয় করেছে এবং আজ ইউরোপের বিভিন্ন ক্যাম্পাসে নিজেদের স্বপ্ন পূরণ করছে।',
   testimonials: [
     { initial: 'S', name: 'Sadikur Rahman', tag: 'Hungary Visa Approved', review: '"I was terrified of the embassy. My English wasn\'t perfect, and I thought they would reject me instantly. The mock interviews in this bootcamp completely changed my body language. When I faced the real officer, it felt easier than the bootcamp!"' },
-    { initial: 'F', name: 'Fahim Faysal', tag: 'Germany Student Visa', review: '"এজেন্সি আমাকে বলেছিল আমার প্রোফাইলে ভিসা হবে না। SAWN BD এর গাইডলাইন ফলো করে আমি নিজে SOP লিখি এবং ইউনিভার্সিটি খুঁজি। আলহামদুলিল্লাহ, আজ আমি মিউনিখে। The 1:1 mentorship is a game changer."' },
+    { initial: 'F', name: 'Fahim Faysal', tag: 'Germany Student Visa', review: '"এজেন্সি আমাকে বলেছিল আমার প্রোফাইলে ভিসা হবে fix হবে না। SAWN BD এর গাইডলাইন ফলো করে আমি নিজে SOP লিখি এবং ইউনিভার্সিটি খুঁজি। আলহামদুলিল্লাহ, আজ আমি মিউনিখে। The 1:1 mentorship is a game changer."' },
     { initial: 'N', name: 'Nusrat Jahan', tag: 'Austria Visa Approved', review: '"The strict deadline and assignment system kept me on track. I didn\'t know how to write an SOP before this. The platform is so professional, it felt like I was already studying in a European university."' },
     { initial: 'T', name: 'Tanvir Ahmed', tag: 'Poland Visa Approved', review: '"Everything is so structured. Niloy vai doesn\'t just spoon-feed you; he forces you to build your own confidence. The day of my embassy interview, I answered every question with zero hesitation."' },
     { initial: 'R', name: 'Rakib Hasan', tag: 'Sweden Scholarship', review: '"The document mastery module saved my life. I was about to submit a terrible CV. The platform\'s gamified system with Gems made learning how to process files actually fun and addictive."' },
@@ -80,7 +80,7 @@ const INITIAL_FORM_STATE = {
   ctaBtnText: 'এনরোলমেন্ট নিশ্চিত করো',
   footerDesc: 'Scholarship student in Europe helping Bangladeshi students prepare confidently for study abroad, visa interviews, and English communication.',
   footerLocation: '📍 Nyíregyháza, Hungary',
-  footerEmail: 'support@beyondborders.com',
+  footerEmail: 'support@sawnbd.com',
   footerRights: '© 2026 SAWN BD with Niloy Baruaa. All rights reserved.',
 
   // ================= COURSE DETAILS PAGE =================
@@ -155,21 +155,16 @@ export default function OmniCMS() {
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState('');
   
-  // PAGE NAVIGATOR: Which page are we editing?
   const [activePage, setActivePage] = useState('landing');
-  
-  // TAB NAVIGATOR: Which section of the active page are we editing?
   const [activeTab, setActiveTab] = useState('hero');
-  
   const [form, setForm] = useState<any>(INITIAL_FORM_STATE);
 
   useEffect(() => {
     const fetchContent = async () => {
-try {
+      try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/landing-content`);
         const data = await res.json();
         if (data && Object.keys(data).length > 2) { 
-            // THE FIX IS HERE: (prev: any)
             setForm((prev: any) => ({ ...prev, ...data }));
         }
         setLoading(false);
@@ -195,7 +190,6 @@ try {
     } catch (e) { setStatus('❌ Error updating website'); }
   };
 
-  // Helper functions to update simple arrays
   const handleArrayChange = (arrayName: string, index: number, field: string, value: string) => {
     const newArray = [...form[arrayName]];
     newArray[index][field] = value;
@@ -204,7 +198,6 @@ try {
   const addArrayItem = (arrayName: string, emptyObject: any) => setForm({ ...form, [arrayName]: [...form[arrayName], emptyObject] });
   const removeArrayItem = (arrayName: string, index: number) => setForm({ ...form, [arrayName]: form[arrayName].filter((_: any, i: number) => i !== index) });
 
-  // Special Helper for Nested Arrays (Topics inside Curriculum)
   const handleCdTopicChange = (modIndex: number, topicIndex: number, value: string) => {
     const newCurr = [...form.cdCurriculum];
     newCurr[modIndex].topics[topicIndex] = value;
@@ -221,7 +214,6 @@ try {
     setForm({ ...form, cdCurriculum: newCurr });
   };
 
-  // Handle Page Switching
   const handlePageSwitch = (pageName: string, defaultTab: string) => {
     setActivePage(pageName);
     setActiveTab(defaultTab);
@@ -242,26 +234,24 @@ try {
 
         {status && <div className="mb-6 p-4 bg-successGreen/20 text-successGreen font-bold rounded border border-successGreen text-center sticky top-4 z-50 shadow-2xl backdrop-blur-md">{status}</div>}
 
-        {/* 1. PAGE SELECTOR */}
         <div className="flex gap-4 mb-4">
           <button onClick={() => handlePageSwitch('landing', 'hero')} className={`px-6 py-3 rounded-t-xl font-black transition ${activePage === 'landing' ? 'bg-primaryAccent text-white' : 'bg-darkBg text-gray-400 hover:bg-gray-800'}`}>1. Landing Page</button>
           <button onClick={() => handlePageSwitch('courseDetails', 'cd_hero')} className={`px-6 py-3 rounded-t-xl font-black transition ${activePage === 'courseDetails' ? 'bg-neonBlue text-white' : 'bg-darkBg text-gray-400 hover:bg-gray-800'}`}>2. Course Details</button>
           <button onClick={() => handlePageSwitch('feedback', 'sf_hero')} className={`px-6 py-3 rounded-t-xl font-black transition ${activePage === 'feedback' ? 'bg-successGreen text-black' : 'bg-darkBg text-gray-400 hover:bg-gray-800'}`}>3. Student Feedback</button>
         </div>
 
-        {/* 2. SECTION TABS (Changes based on Active Page) */}
         <div className="flex flex-wrap gap-2 mb-6 bg-cardBg p-3 rounded-b-xl rounded-tr-xl border border-gray-800 shadow-lg">
           {activePage === 'landing' && [
             { id: 'hero', label: 'Hero & Price' }, { id: 'stats', label: 'Stats' }, { id: 'pains', label: 'Pains' }, { id: 'xfactors', label: 'X-Factors' }, { id: 'steps', label: 'Steps' }, { id: 'curriculum', label: 'Curriculum' }, { id: 'projects', label: 'Projects' }, { id: 'testimonials', label: 'Testimonials' }, { id: 'faqs', label: 'FAQs' }, { id: 'cta_footer', label: 'CTA & Footer' }
-          ].map(tab => <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-4 py-2 rounded-lg text-sm font-bold transition ${activeTab === tab.id ? 'bg-gray-700 text-white' : 'hover:bg-darkBg text-gray-400'}`}>{tab.label}</button>)}
+          ].map((tab: { id: string, label: string }) => <button key={tab.id} type="button" onClick={() => setActiveTab(tab.id)} className={`px-4 py-2 rounded-lg text-sm font-bold transition ${activeTab === tab.id ? 'bg-gray-700 text-white' : 'hover:bg-darkBg text-gray-400'}`}>{tab.label}</button>)}
 
           {activePage === 'courseDetails' && [
             { id: 'cd_hero', label: 'Hero & CTA' }, { id: 'cd_curriculum', label: 'Full Curriculum Modules' }
-          ].map(tab => <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-4 py-2 rounded-lg text-sm font-bold transition ${activeTab === tab.id ? 'bg-gray-700 text-white' : 'hover:bg-darkBg text-gray-400'}`}>{tab.label}</button>)}
+          ].map((tab: { id: string, label: string }) => <button key={tab.id} type="button" onClick={() => setActiveTab(tab.id)} className={`px-4 py-2 rounded-lg text-sm font-bold transition ${activeTab === tab.id ? 'bg-gray-700 text-white' : 'hover:bg-darkBg text-gray-400'}`}>{tab.label}</button>)}
 
           {activePage === 'feedback' && [
             { id: 'sf_hero', label: 'Hero & Stats' }, { id: 'sf_placements', label: 'University Placements' }, { id: 'sf_testimonials', label: 'Full Reviews' }, { id: 'sf_videos', label: 'Video Links' }, { id: 'sf_cta', label: 'CTA & Footer Info' }
-          ].map(tab => <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-4 py-2 rounded-lg text-sm font-bold transition ${activeTab === tab.id ? 'bg-gray-700 text-white' : 'hover:bg-darkBg text-gray-400'}`}>{tab.label}</button>)}
+          ].map((tab: { id: string, label: string }) => <button key={tab.id} type="button" onClick={() => setActiveTab(tab.id)} className={`px-4 py-2 rounded-lg text-sm font-bold transition ${activeTab === tab.id ? 'bg-gray-700 text-white' : 'hover:bg-darkBg text-gray-400'}`}>{tab.label}</button>)}
         </div>
 
         <form onSubmit={handleUpdate} className="bg-cardBg p-6 md:p-8 rounded-2xl border border-gray-800 shadow-2xl mb-10">
@@ -285,7 +275,7 @@ try {
           {activeTab === 'stats' && (
             <div className="space-y-4 animate-fade-in">
               <input type="text" value={form.impactTitle} onChange={e => setForm({...form, impactTitle: e.target.value})} className="w-full bg-darkBg border border-gray-700 p-3 rounded text-white font-bold mb-4" />
-              {[1, 2, 3, 4].map(num => (
+              {[1, 2, 3, 4].map((num: number) => (
                 <div key={num} className="grid grid-cols-2 gap-4 bg-darkBg p-4 rounded border border-gray-800">
                   <input type="text" value={form[`stat${num}Number`]} onChange={e => setForm({...form, [`stat${num}Number`]: e.target.value})} className="bg-cardBg border border-gray-700 p-3 rounded text-white font-bold text-xl" />
                   <input type="text" value={form[`stat${num}Text`]} onChange={e => setForm({...form, [`stat${num}Text`]: e.target.value})} className="bg-cardBg border border-gray-700 p-3 rounded text-white" />
@@ -445,7 +435,6 @@ try {
             </div>
           )}
 
-
           {/* ======================= COURSE DETAILS PAGE EDITORS ======================= */}
           {activeTab === 'cd_hero' && (
             <div className="space-y-4 animate-fade-in">
@@ -491,7 +480,6 @@ try {
              </div>
           )}
 
-
           {/* ======================= STUDENT FEEDBACK PAGE EDITORS ======================= */}
           {activeTab === 'sf_hero' && (
             <div className="space-y-4 animate-fade-in">
@@ -505,7 +493,7 @@ try {
               <div className="mt-8 border-t border-gray-800 pt-6">
                 <h3 className="text-lg font-bold text-gray-300 mb-4">Top 4 Statistics</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {[1, 2, 3, 4].map(num => (
+                  {[1, 2, 3, 4].map((num: number) => (
                     <div key={num} className="bg-darkBg p-4 rounded border border-gray-800">
                       <input type="text" value={form[`sfStat${num}Num`]} onChange={e => setForm({...form, [`sfStat${num}Num`]: e.target.value})} className="w-full bg-cardBg border border-gray-700 p-2 rounded text-white font-bold text-lg mb-2" />
                       <input type="text" value={form[`sfStat${num}Label`]} onChange={e => setForm({...form, [`sfStat${num}Label`]: e.target.value})} className="w-full bg-cardBg border border-gray-700 p-2 rounded text-gray-400 text-sm uppercase" />
@@ -599,7 +587,6 @@ try {
               </div>
             </div>
           )}
-
 
           {/* SUBMIT BUTTON */}
           <div className="mt-12 pt-6 border-t border-gray-800 sticky bottom-4 z-40 bg-cardBg p-4 rounded-xl shadow-2xl">
