@@ -14,7 +14,7 @@ export default function Navbar() {
           href="/"
           className="text-xl md:text-2xl font-bold tracking-widest text-white cursor-pointer"
         >
-          SWAN<span className="text-primaryAccent">BD</span>
+          SAWN<span className="text-primaryAccent">BD</span>
         </Link>
 
         {/* Real Multi-Page Routing Links */}
