@@ -165,14 +165,18 @@ export default function OmniCMS() {
 
   useEffect(() => {
     const fetchContent = async () => {
-      try {
+try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/landing-content`);
         const data = await res.json();
         if (data && Object.keys(data).length > 2) { 
+            // THE FIX IS HERE: (prev: any)
             setForm((prev: any) => ({ ...prev, ...data }));
         }
         setLoading(false);
-      } catch (e) { console.error(e); setLoading(false); }
+      } catch (e) { 
+        console.error(e); 
+        setLoading(false); 
+      }
     };
     fetchContent();
   }, []);

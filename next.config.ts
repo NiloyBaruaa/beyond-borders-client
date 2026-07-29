@@ -1,8 +1,4 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
-  /** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
     // !! WARN !!
@@ -19,6 +15,3 @@ const nextConfig = {
 };
 
 export default nextConfig; // (Use module.exports = nextConfig; if it's a .js file)
-};
-
-export default nextConfig;
