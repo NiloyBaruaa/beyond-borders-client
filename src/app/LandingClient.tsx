@@ -45,7 +45,10 @@ export default function LandingClient({ content }: { content: any }) {
       </section>
 
       {/* ---------------- IMPACT STATS ---------------- */}
-      <section id="impact" className="border-y border-gray-900 bg-[#0a0a0a] py-12">
+      <section
+        id="impact"
+        className="border-y border-gray-900 bg-[#0a0a0a] py-12"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
           <h3 className="text-xl md:text-2xl font-bold text-gray-400 mb-8 uppercase tracking-widest">
             {content.impactTitle}
@@ -55,25 +58,33 @@ export default function LandingClient({ content }: { content: any }) {
               <span className="block text-4xl md:text-6xl font-extrabold text-white mb-2">
                 {content.stat1Number}
               </span>
-              <span className="text-gray-500 font-semibold uppercase">{content.stat1Text}</span>
+              <span className="text-gray-500 font-semibold uppercase">
+                {content.stat1Text}
+              </span>
             </div>
             <div>
               <span className="block text-4xl md:text-6xl font-extrabold text-neonBlue mb-2">
                 {content.stat2Number}
               </span>
-              <span className="text-gray-500 font-semibold uppercase">{content.stat2Text}</span>
+              <span className="text-gray-500 font-semibold uppercase">
+                {content.stat2Text}
+              </span>
             </div>
             <div>
               <span className="block text-4xl md:text-6xl font-extrabold text-successGreen mb-2">
                 {content.stat3Number}
               </span>
-              <span className="text-gray-500 font-semibold uppercase">{content.stat3Text}</span>
+              <span className="text-gray-500 font-semibold uppercase">
+                {content.stat3Text}
+              </span>
             </div>
             <div>
               <span className="block text-4xl md:text-6xl font-extrabold text-primaryAccent mb-2">
                 {content.stat4Number}
               </span>
-              <span className="text-gray-500 font-semibold uppercase">{content.stat4Text}</span>
+              <span className="text-gray-500 font-semibold uppercase">
+                {content.stat4Text}
+              </span>
             </div>
           </div>
         </div>
@@ -83,14 +94,22 @@ export default function LandingClient({ content }: { content: any }) {
       <section className="py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
-            {content.painTitle} <span className="text-gray-700 px-4">|</span> {content.solutionTitle}
+            {content.painTitle} <span className="text-gray-700 px-4">|</span>{" "}
+            {content.solutionTitle}
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {(content.pains || []).map((p: any, i: number) => (
-              <div key={i} className="bg-cardBg p-8 rounded-2xl border border-gray-800 hover:border-gray-600 transition-colors">
-                <p className="text-gray-400 mb-6 border-b border-gray-800 pb-6 min-h-[100px]">{p.pain}</p>
-                <div className="text-successGreen text-lg font-bold mb-2 flex items-center gap-2">{p.tag}</div>
+              <div
+                key={i}
+                className="bg-cardBg p-8 rounded-2xl border border-gray-800 hover:border-gray-600 transition-colors"
+              >
+                <p className="text-gray-400 mb-6 border-b border-gray-800 pb-6 min-h-[100px]">
+                  {p.pain}
+                </p>
+                <div className="text-successGreen text-lg font-bold mb-2 flex items-center gap-2">
+                  {p.tag}
+                </div>
                 <p className="text-gray-300 text-sm">{p.solution}</p>
               </div>
             ))}
@@ -110,7 +129,10 @@ export default function LandingClient({ content }: { content: any }) {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {(content.xFactors || []).map((x: any, i: number) => (
-              <div key={i} className="bg-darkBg p-6 rounded-xl border border-gray-800">
+              <div
+                key={i}
+                className="bg-darkBg p-6 rounded-xl border border-gray-800"
+              >
                 <div className="text-3xl mb-4">{x.icon}</div>
                 <h4 className="font-bold text-lg mb-2">{x.title}</h4>
                 <p className="text-sm text-gray-400">{x.desc}</p>
@@ -133,14 +155,20 @@ export default function LandingClient({ content }: { content: any }) {
               <div
                 key={i}
                 className={`flex gap-6 items-start bg-cardBg p-6 rounded-2xl border ${
-                  i === 3 ? "border-neonBlue shadow-[0_0_20px_rgba(59,130,246,0.1)]" : "border-gray-800"
+                  i === 3
+                    ? "border-neonBlue shadow-[0_0_20px_rgba(59,130,246,0.1)]"
+                    : "border-gray-800"
                 }`}
               >
-                <div className={`text-4xl font-black ${i === 3 ? "text-neonBlue" : "text-gray-700"}`}>
+                <div
+                  className={`text-4xl font-black ${i === 3 ? "text-neonBlue" : "text-gray-700"}`}
+                >
                   0{i + 1}
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold mb-2 text-white">{s.title}</h4>
+                  <h4 className="text-xl font-bold mb-2 text-white">
+                    {s.title}
+                  </h4>
                   <p className="text-gray-400">{s.desc}</p>
                 </div>
               </div>
@@ -150,18 +178,30 @@ export default function LandingClient({ content }: { content: any }) {
       </section>
 
       {/* ---------------- CURRICULUM ---------------- */}
-      <section id="curriculum" className="bg-[#0a0a0a] py-20 md:py-32 border-y border-gray-900">
+      <section
+        id="curriculum"
+        className="bg-[#0a0a0a] py-20 md:py-32 border-y border-gray-900"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
             {content.curriculumTitlePart1}{" "}
-            <span className="text-primaryAccent">{content.curriculumTitlePart2}</span>
+            <span className="text-primaryAccent">
+              {content.curriculumTitlePart2}
+            </span>
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(content.curriculum || []).map((c: any, i: number) => (
-              <div key={i} className="bg-darkBg p-8 rounded-xl border border-gray-800 hover:border-primaryAccent transition">
-                <h4 className="text-2xl font-bold mb-3 text-white">{c.title}</h4>
-                <p className="text-sm text-gray-400 leading-relaxed">{c.desc}</p>
+              <div
+                key={i}
+                className="bg-darkBg p-8 rounded-xl border border-gray-800 hover:border-primaryAccent transition"
+              >
+                <h4 className="text-2xl font-bold mb-3 text-white">
+                  {c.title}
+                </h4>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  {c.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -173,7 +213,10 @@ export default function LandingClient({ content }: { content: any }) {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
             {content.projectsTitlePart1} <br />
-            <span className="text-successGreen">{content.projectsTitlePart2}</span> {content.projectsTitlePart3}
+            <span className="text-successGreen">
+              {content.projectsTitlePart2}
+            </span>{" "}
+            {content.projectsTitlePart3}
           </h2>
 
           <div className="space-y-6 max-w-4xl mx-auto">
@@ -181,7 +224,9 @@ export default function LandingClient({ content }: { content: any }) {
               <div
                 key={i}
                 className={`flex flex-col md:flex-row gap-6 items-center bg-cardBg p-8 rounded-2xl border ${
-                  i === 2 ? "border-successGreen shadow-[0_0_30px_rgba(16,185,129,0.1)]" : "border-gray-800"
+                  i === 2
+                    ? "border-successGreen shadow-[0_0_30px_rgba(16,185,129,0.1)]"
+                    : "border-gray-800"
                 }`}
               >
                 <div
@@ -192,8 +237,12 @@ export default function LandingClient({ content }: { content: any }) {
                   {p.icon}
                 </div>
                 <div>
-                  <h4 className="text-2xl font-bold text-white mb-2">{p.title}</h4>
-                  <p className="text-gray-400 text-sm leading-relaxed">{p.desc}</p>
+                  <h4 className="text-2xl font-bold text-white mb-2">
+                    {p.title}
+                  </h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {p.desc}
+                  </p>
                 </div>
               </div>
             ))}
@@ -202,23 +251,39 @@ export default function LandingClient({ content }: { content: any }) {
       </section>
 
       {/* ---------------- TESTIMONIALS ---------------- */}
-      <section id="testimonials" className="bg-[#0a0a0a] py-20 md:py-32 border-y border-gray-900">
+      <section
+        id="testimonials"
+        className="bg-[#0a0a0a] py-20 md:py-32 border-y border-gray-900"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-6">{content.testimonialsTitle}</h2>
-          <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">{content.testimonialsSubtitle}</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-6">
+            {content.testimonialsTitle}
+          </h2>
+          <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+            {content.testimonialsSubtitle}
+          </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(content.testimonials || []).map((t: any, i: number) => {
               const avatarColors = [
-                "bg-primaryAccent", "bg-neonBlue", "bg-successGreen text-black",
-                "bg-gray-600", "bg-purple-600", "bg-orange-500 text-black",
+                "bg-primaryAccent",
+                "bg-neonBlue",
+                "bg-successGreen text-black",
+                "bg-gray-600",
+                "bg-purple-600",
+                "bg-orange-500 text-black",
               ];
               const selectedColor = avatarColors[i % avatarColors.length];
 
               return (
-                <div key={i} className="bg-darkBg p-8 rounded-xl border border-gray-800">
+                <div
+                  key={i}
+                  className="bg-darkBg p-8 rounded-xl border border-gray-800"
+                >
                   <div className="flex items-center gap-4 mb-6">
-                    <div className={`h-12 w-12 rounded-full flex items-center justify-center font-bold text-xl ${selectedColor}`}>
+                    <div
+                      className={`h-12 w-12 rounded-full flex items-center justify-center font-bold text-xl ${selectedColor}`}
+                    >
                       {t.initial}
                     </div>
                     <div>
@@ -235,20 +300,29 @@ export default function LandingClient({ content }: { content: any }) {
       </section>
 
       {/* ---------------- FAQ ---------------- */}
-      <section id="faq" className="py-20 md:py-32 max-w-4xl mx-auto px-4 md:px-8">
+      <section
+        id="faq"
+        className="py-20 md:py-32 max-w-4xl mx-auto px-4 md:px-8"
+      >
         <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
-          {content.faqTitlePart1} <span className="text-neonBlue">{content.faqTitlePart2}</span>
+          {content.faqTitlePart1}{" "}
+          <span className="text-neonBlue">{content.faqTitlePart2}</span>
         </h2>
 
         <div className="space-y-4">
           {(content.faqs || []).map((faq: any, idx: number) => (
-            <div key={idx} className="bg-cardBg border border-gray-800 rounded-lg overflow-hidden">
+            <div
+              key={idx}
+              className="bg-cardBg border border-gray-800 rounded-lg overflow-hidden"
+            >
               <button
                 onClick={() => toggleFaq(idx)}
                 className="w-full px-6 py-4 text-left font-bold flex justify-between items-center focus:outline-none"
               >
                 {faq.q}
-                <span className="text-primaryAccent text-xl">{openFaq === idx ? "−" : "+"}</span>
+                <span className="text-primaryAccent text-xl">
+                  {openFaq === idx ? "−" : "+"}
+                </span>
               </button>
               {openFaq === idx && (
                 <div className="px-6 pb-4 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4">
@@ -263,8 +337,12 @@ export default function LandingClient({ content }: { content: any }) {
       {/* ---------------- CALL TO ACTION ---------------- */}
       <section className="bg-gradient-to-b from-[#0a0a0a] to-[#050505] py-24 text-center border-t border-gray-900">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">{content.ctaTitle}</h2>
-          <p className="text-xl text-gray-400 mb-10 leading-relaxed">{content.ctaSubtitle}</p>
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            {content.ctaTitle}
+          </h2>
+          <p className="text-xl text-gray-400 mb-10 leading-relaxed">
+            {content.ctaSubtitle}
+          </p>
           <button
             onClick={() => setIsEnrollModalOpen(true)}
             className="bg-primaryAccent hover:bg-purple-500 text-white px-12 py-5 rounded-xl font-bold text-xl shadow-[0_10px_30px_rgba(139,92,246,0.3)] transition-transform hover:scale-105 active:scale-95"
@@ -282,30 +360,88 @@ export default function LandingClient({ content }: { content: any }) {
               SAWN <span className="text-primaryAccent">BD</span>
             </div>
             <p className="text-gray-500 text-sm mb-4">{content.footerDesc}</p>
-            <p className="text-gray-400 text-sm font-semibold">{content.footerLocation}</p>
+            <p className="text-gray-400 text-sm font-semibold">
+              {content.footerLocation}
+            </p>
             <p className="text-gray-400 text-sm">{content.footerEmail}</p>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">লিঙ্কসমূহ</h4>
+            <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">
+              লিঙ্কসমূহ
+            </h4>
             <ul className="space-y-2 text-gray-500 text-sm">
-              <li><a href="/about" className="hover:text-primaryAccent transition">About Us</a></li>
-              <li><a href="#testimonials" className="hover:text-primaryAccent transition">Success Stories</a></li>
-              <li><a href="/refund-policy" className="hover:text-primaryAccent transition">Refund Policy</a></li>
-              <li><a href="/privacy-policy" className="hover:text-primaryAccent transition">Privacy Policy</a></li>
-              <li><a href="/terms" className="hover:text-primaryAccent transition">Terms & Condition</a></li>
+              <li>
+                <a
+                  href="/about"
+                  className="hover:text-primaryAccent transition"
+                >
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#testimonials"
+                  className="hover:text-primaryAccent transition"
+                >
+                  Success Stories
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/refund-policy"
+                  className="hover:text-primaryAccent transition"
+                >
+                  Refund Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/privacy-policy"
+                  className="hover:text-primaryAccent transition"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/terms"
+                  className="hover:text-primaryAccent transition"
+                >
+                  Terms & Condition
+                </a>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">সোশ্যাল মিডিয়া</h4>
+            <h4 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">
+              সোশ্যাল মিডিয়া
+            </h4>
             <div className="flex gap-4">
-              <a href="#" className="h-10 w-10 bg-darkBg border border-gray-800 rounded-full flex items-center justify-center hover:bg-primaryAccent hover:text-white transition-colors text-gray-400">FB</a>
-              <a href="#" className="h-10 w-10 bg-darkBg border border-gray-800 rounded-full flex items-center justify-center hover:bg-primaryAccent hover:text-white transition-colors text-gray-400">IG</a>
-              <a href="#" className="h-10 w-10 bg-darkBg border border-gray-800 rounded-full flex items-center justify-center hover:bg-primaryAccent hover:text-white transition-colors text-gray-400">YT</a>
+              <a
+                href="#"
+                className="h-10 w-10 bg-darkBg border border-gray-800 rounded-full flex items-center justify-center hover:bg-primaryAccent hover:text-white transition-colors text-gray-400"
+              >
+                FB
+              </a>
+              <a
+                href="#"
+                className="h-10 w-10 bg-darkBg border border-gray-800 rounded-full flex items-center justify-center hover:bg-primaryAccent hover:text-white transition-colors text-gray-400"
+              >
+                IG
+              </a>
+              <a
+                href="#"
+                className="h-10 w-10 bg-darkBg border border-gray-800 rounded-full flex items-center justify-center hover:bg-primaryAccent hover:text-white transition-colors text-gray-400"
+              >
+                YT
+              </a>
             </div>
             <div className="mt-6">
-              <p className="text-gray-500 text-xs">Developed with precise engineering standards.</p>
+              <p className="text-gray-500 text-xs">
+                Developed with precise engineering standards.
+              </p>
             </div>
           </div>
         </div>
@@ -314,7 +450,10 @@ export default function LandingClient({ content }: { content: any }) {
         </div>
       </footer>
 
-      <EnrollModal isOpen={isEnrollModalOpen} onClose={() => setIsEnrollModalOpen(false)} />
+      <EnrollModal
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+      />
     </div>
   );
 }
