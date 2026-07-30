@@ -7,48 +7,56 @@ export default function LoginBox() {
   const [step, setStep] = useState<1 | 2>(1);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [otp, setOtp] = useState(['', '', '', '']);
+  // Upgraded to 6 digits to match your backend OTP generator
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   // 1. The Initial Login
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
+    console.log("📍 [1] Login Button Clicked. Reaching out to server...");
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/login`, {
+      // Fixed URL: Removed the malformed 'http://https://' and double '/api/api'
+      const response = await fetch('https://beyond-borders-server.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
+      console.log("📍 [2] Server Response:", response.status, data);
 
       if (response.ok) {
         setStep(2);
       } else {
-        // Updated to catch all error formats
         setError(data.message || data.msg || "Authentication failed.");
       }
     } catch (err) {
+      console.error("🔴 [CRASH] Fetch Failed:", err);
       setError("Server is offline. Please check your connection.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // 2. The OTP Verification (FIXED DYNAMIC ROUTING & ERROR HANDLING)
+  // 2. The OTP Verification
   const handleOtpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
     const fullOtp = otp.join(''); 
 
     try {
-     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/verify-otp`, {
+      const response = await fetch('https://beyond-borders-server.onrender.com/api/auth/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           email: email, 
-          otp: fullOtp, 
-          deviceId: localStorage.getItem('bb_device_id') 
+          otp: fullOtp
         })
       });
 
@@ -58,21 +66,20 @@ export default function LoginBox() {
         // Success! Save the token
         localStorage.setItem('bootcamp_token', data.token);
         
-        // Read the role from the backend response
+        // Route based on clearance level
         const userRole = data.user?.role;
-        
-        // DYNAMIC ROUTING: Route based on clearance level
         if (userRole === 'superadmin' || userRole === 'admin') {
-          router.push('/admin/system'); // Commander & Staff go here
+          router.push('/admin/system'); 
         } else {
-          router.push('/dashboard'); // Standard recruits go here
+          router.push('/dashboard'); 
         }
       } else {
-        // THE FIX: Catching both 'message' and 'msg' so no errors are invisible!
-        setError(data.message || data.msg || "Verification failed. Contact support.");
+        setError(data.message || data.msg || "Verification failed.");
       }
     } catch (err) {
       setError("Server error during verification.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -83,7 +90,8 @@ export default function LoginBox() {
     newOtp[index] = value;
     setOtp(newOtp);
     
-    if (value && index < 3) {
+    // Auto-focus next input (Upgraded to handle 6 inputs)
+    if (value && index < 5) {
       document.getElementById(`otp-${index + 1}`)?.focus();
     }
   };
@@ -94,7 +102,7 @@ export default function LoginBox() {
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-white tracking-tight">SAWN BD</h1>
           <p className="mt-2 text-sm text-gray-400">
-            {step === 1 ? "Enter your credentials to access the bootcamp." : "Enter the 4-digit code sent to your device."}
+            {step === 1 ? "Enter your credentials to access the bootcamp." : "Enter the 6-digit code sent to your device."}
           </p>
         </div>
 
@@ -130,14 +138,15 @@ export default function LoginBox() {
             </div>
             <button
               type="submit"
-              className="w-full rounded-lg bg-primaryAccent px-4 py-3 font-semibold text-white hover:bg-purple-500 transition-colors"
+              disabled={isLoading}
+              className="w-full rounded-lg bg-primaryAccent px-4 py-3 font-semibold text-white hover:bg-purple-500 transition-colors disabled:opacity-50"
             >
-              Secure Login
+              {isLoading ? 'Authenticating...' : 'Secure Login'}
             </button>
           </form>
         ) : (
           <form onSubmit={handleOtpSubmit} className="space-y-6">
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-2">
               {otp.map((digit, idx) => (
                 <input
                   key={idx}
@@ -146,15 +155,16 @@ export default function LoginBox() {
                   maxLength={1}
                   value={digit}
                   onChange={(e) => handleOtpChange(idx, e.target.value)}
-                  className="w-14 h-14 text-center text-2xl font-bold rounded-lg bg-darkBg border border-gray-700 text-white focus:border-neonBlue focus:outline-none focus:ring-1 focus:ring-neonBlue transition-all"
+                  className="w-12 h-14 text-center text-xl font-bold rounded-lg bg-darkBg border border-gray-700 text-white focus:border-neonBlue focus:outline-none focus:ring-1 focus:ring-neonBlue transition-all"
                 />
               ))}
             </div>
             <button
               type="submit"
-              className="w-full rounded-lg bg-neonBlue px-4 py-3 font-semibold text-white hover:bg-blue-500 transition-colors"
+              disabled={isLoading}
+              className="w-full rounded-lg bg-neonBlue px-4 py-3 font-semibold text-white hover:bg-blue-500 transition-colors disabled:opacity-50"
             >
-              Verify & Enter
+              {isLoading ? 'Verifying...' : 'Verify & Enter'}
             </button>
             <button 
               type="button" 
