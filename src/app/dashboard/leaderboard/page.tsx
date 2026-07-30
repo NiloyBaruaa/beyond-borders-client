@@ -16,7 +16,7 @@ export default function Leaderboard() {
 
     const fetchLeaderboard = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/auth/leaderboard', {
+        const response = await fetch('http://https://beyond-borders-server.onrender.com/api/api/auth/leaderboard', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (response.ok) {

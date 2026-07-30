@@ -15,14 +15,14 @@ export default function StudentAnalytics() {
     const fetchAnalyticsData = async () => {
       try {
         // Fetch Live User Data
-        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/me`, {
+        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/me`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const userData = await userRes.json();
         setStudent(userData);
 
         // Fetch Live Module Count
-        const modRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/modules`, {
+        const modRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/modules`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const modData = await modRes.json();

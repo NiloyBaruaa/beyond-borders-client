@@ -20,14 +20,14 @@ export default function StudentDashboard() {
 
     const fetchDashboardData = async () => {
       try {
-        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/me`, {
+        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/me`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!userRes.ok) throw new Error("Not authorized");
         setStudent(await userRes.json());
 
         // Fetch Modules and Sessions
-        const contentRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/modules`, {
+        const contentRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/modules`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const contentData = await contentRes.json();
@@ -35,7 +35,7 @@ export default function StudentDashboard() {
         setModules(contentData.modules.sort((a: any, b: any) => a.moduleId - b.moduleId));
         setSessions(contentData.sessions); 
 
-        const annRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/announcements`, {
+        const annRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/announcements`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         setHasUnread((await annRes.json()).hasUnread);

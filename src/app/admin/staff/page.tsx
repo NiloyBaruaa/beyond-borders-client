@@ -12,7 +12,7 @@ export default function StaffManagement() {
 
   const fetchStaff = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/staff`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/staff`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
       });
       
@@ -38,7 +38,7 @@ export default function StaffManagement() {
     e.preventDefault();
     setStatus('Deploying new staff credentials...');
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/add-staff`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/add-staff`, {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json', 
@@ -68,7 +68,7 @@ export default function StaffManagement() {
     if (!confirm('Are you sure you want to permanently revoke access for this admin?')) return;
     
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/remove-staff/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/remove-staff/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
       });

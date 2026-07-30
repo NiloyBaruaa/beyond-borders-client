@@ -27,7 +27,7 @@ export default function Bookmarks() {
     const fetchData = async () => {
       try {
         // 1. Fetch user data to get bookmarked IDs and Email
-        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/me`, {
+        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/me`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const userData = await userRes.json();
@@ -35,7 +35,7 @@ export default function Bookmarks() {
         setStudentEmail(userData.email);
 
         // 2. Fetch all modules to find the matching videos
-        const modRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/modules`, {
+        const modRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/modules`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const allModules = await modRes.json();

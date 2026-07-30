@@ -52,7 +52,7 @@ export default function SystemCore() {
   const fetchLiveContent = async () => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/modules`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/auth/modules`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("bootcamp_token")}`,
@@ -80,7 +80,7 @@ export default function SystemCore() {
     try {
       // NOTE: Ensure your backend has a /api/auth/register route for admin to create students!
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/register`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/auth/register`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -119,7 +119,7 @@ export default function SystemCore() {
         ],
       };
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/add-content`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/admin/add-content`,
         {
           method: "POST",
           headers: {
@@ -158,7 +158,7 @@ export default function SystemCore() {
         ],
       };
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/add-content`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/admin/add-content`,
         {
           method: "POST",
           headers: {
@@ -194,7 +194,7 @@ export default function SystemCore() {
       return;
     try {
       await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/module/${moduleId}`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/admin/module/${moduleId}`,
         {
           method: "DELETE",
           headers: {
@@ -213,7 +213,7 @@ export default function SystemCore() {
       return;
     try {
       await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/admin/module/${moduleId}/quiz/${questionId}`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/admin/module/${moduleId}/quiz/${questionId}`,
         {
           method: "DELETE",
           headers: {

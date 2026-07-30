@@ -13,7 +13,7 @@ export default function CohortManager() {
     // We fetch global modules to extract the config data from our smart route
     const fetchConfig = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/modules`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/modules`, {
           headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
         });
         const data = await res.json();
@@ -28,7 +28,7 @@ export default function CohortManager() {
     e.preventDefault();
     setStatus('Updating Global Cohort Rules...');
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/config`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/config`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` },
         body: JSON.stringify(config)
@@ -41,7 +41,7 @@ export default function CohortManager() {
     e.preventDefault();
     setStatus('Deploying Session...');
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/conceptual-session`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/conceptual-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` },
         body: JSON.stringify({ ...sessionForm, batchNumber: parseInt(sessionForm.batchNumber.toString()) })

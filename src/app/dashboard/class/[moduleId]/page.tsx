@@ -28,7 +28,7 @@ export default function Classroom({ params }: { params: Promise<{ moduleId: stri
     const fetchModuleData = async () => {
       try {
         // 1. Fetch the user to get their email for the Watermark
-        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/me`, {
+        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/me`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (userRes.ok) {
@@ -37,7 +37,7 @@ export default function Classroom({ params }: { params: Promise<{ moduleId: stri
         }
 
         // 2. Fetch the modules
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/modules`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/modules`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -103,7 +103,7 @@ export default function Classroom({ params }: { params: Promise<{ moduleId: stri
               <button 
                 onClick={async () => {
                   try {
-                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/toggle-bookmark`, {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/toggle-bookmark`, {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` },
                       body: JSON.stringify({ videoId: activeVideo.videoId })

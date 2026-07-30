@@ -86,7 +86,7 @@ const DEFAULT_CONTENT = {
 async function getLandingData() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/landing-content`,
+      `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/auth/landing-content`,
       { next: { revalidate: 300 } } 
     );
     const data = await res.json();

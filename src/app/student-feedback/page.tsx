@@ -63,7 +63,7 @@ export default function StudentFeedback() {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/landing-content`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/auth/landing-content`);
         const data = await res.json();
         if (data && Object.keys(data).length > 2) {
           setDbContent(data);

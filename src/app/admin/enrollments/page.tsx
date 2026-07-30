@@ -10,7 +10,7 @@ export default function EnrollmentApprovals() {
 
   const fetchRequests = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/enrollment/pending`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/enrollment/pending`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
       });
       if (!res.ok) throw new Error('Failed to fetch');
@@ -30,7 +30,7 @@ export default function EnrollmentApprovals() {
     
     setActionStatus(`Processing ${action}...`);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/enrollment/${action}/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/enrollment/${action}/${id}`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
       });

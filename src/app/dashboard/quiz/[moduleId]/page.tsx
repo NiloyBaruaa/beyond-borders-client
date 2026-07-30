@@ -20,7 +20,7 @@ export default function QuizEngine({ params }: { params: Promise<{ moduleId: str
     const initializeAssessment = async () => {
       try {
         // 1. SECURITY CHECK: Has the student already taken this quiz?
-        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/me`, {
+        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/me`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const userData = await userRes.json();
@@ -39,7 +39,7 @@ export default function QuizEngine({ params }: { params: Promise<{ moduleId: str
         }
 
         // 2. If secure, fetch the quiz data
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/modules`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/modules`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -72,7 +72,7 @@ export default function QuizEngine({ params }: { params: Promise<{ moduleId: str
     setSubmitting(true);
     
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/submit-quiz`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/submit-quiz`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

@@ -40,7 +40,7 @@ export default function EnrollModal({
     try {
       const res = await fetch(
         `${
-          process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
+          process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'
         }/api/enrollment/submit`,
         {
           method: 'POST',

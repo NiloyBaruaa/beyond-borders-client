@@ -22,7 +22,7 @@ export default function AdminDashboard() {
     const loadAdminData = async () => {
       try {
         // Fetch all students (Backend will block this if token is not an admin)
-        const response = await fetch('http://localhost:5000/api/admin/dashboard-data', {
+        const response = await fetch('http://https://beyond-borders-server.onrender.com/api/api/admin/dashboard-data', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -54,7 +54,7 @@ export default function AdminDashboard() {
         status: marks === 0 ? 'resubmit_requested' : 'graded'
       };
 
-      const response = await fetch('http://localhost:5000/api/admin/grade-assignment', {
+      const response = await fetch('http://https://beyond-borders-server.onrender.com/api/api/admin/grade-assignment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

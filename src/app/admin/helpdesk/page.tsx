@@ -10,7 +10,7 @@ export default function AdminHelpdesk() {
 
   const fetchTickets = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/helpdesk`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/helpdesk`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
       });
       setTickets(await res.json());
@@ -23,7 +23,7 @@ export default function AdminHelpdesk() {
   const handleReply = async (id: string) => {
     if (!replyText[id]) return alert("Reply cannot be empty.");
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/helpdesk/${id}/reply`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/helpdesk/${id}/reply`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` },
         body: JSON.stringify({ reply: replyText[id] })
@@ -36,7 +36,7 @@ export default function AdminHelpdesk() {
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this ticket permanently from the forum?")) return;
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/helpdesk/${id}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/helpdesk/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
       });

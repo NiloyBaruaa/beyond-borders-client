@@ -23,7 +23,7 @@ export default function StudentProfile() {
   useEffect(() => {
     const fetchProfile = async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/me`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/auth/me`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("bootcamp_token")}`,
@@ -43,7 +43,7 @@ export default function StudentProfile() {
     setSaving(true);
     try {
       await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/profile`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/auth/profile`,
         {
           method: "PUT",
           headers: {
@@ -65,7 +65,7 @@ export default function StudentProfile() {
     setPassStatus("Verifying encryption...");
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"}/api/auth/change-password`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://https://beyond-borders-server.onrender.com/api"}/api/auth/change-password`,
         {
           method: "PUT",
           headers: {

@@ -15,7 +15,7 @@ export default function StudentDetails({ params }: { params: Promise<{ id: strin
   const [overridePassword, setOverridePassword] = useState('');
   const fetchStudent = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/student/${studentId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/student/${studentId}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
       });
       setStudent(await res.json());
@@ -27,7 +27,7 @@ export default function StudentDetails({ params }: { params: Promise<{ id: strin
 
   const handleGems = async (action: 'add' | 'subtract') => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/student/${studentId}/gems`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/student/${studentId}/gems`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` },
         body: JSON.stringify({ amount: gemAmount, action })
@@ -39,7 +39,7 @@ export default function StudentDetails({ params }: { params: Promise<{ id: strin
   const handleGrade = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/student/${studentId}/grade`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/student/${studentId}/grade`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` },
         body: JSON.stringify({ assignmentId: gradeForm.assignmentId, marksObtained: gradeForm.marks, feedback: gradeForm.feedback })
@@ -56,7 +56,7 @@ export default function StudentDetails({ params }: { params: Promise<{ id: strin
     if (!confirm('Are you sure you want to forcefully overwrite this student\'s password?')) return;
     
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/student/${studentId}/reset-password`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/student/${studentId}/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` },
         body: JSON.stringify({ newPassword: overridePassword })

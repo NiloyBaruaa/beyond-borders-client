@@ -15,7 +15,7 @@ export default function AdminAnnouncements() {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/announcements`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/announcements`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
       });
       setPosts(await res.json());
@@ -29,8 +29,8 @@ export default function AdminAnnouncements() {
     e.preventDefault();
     try {
       const url = isEditing 
-        ? `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/announcements/${currentId}`
-        : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/announcements`;
+        ? `${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/announcements/${currentId}`
+        : `${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/announcements`;
       
       await fetch(url, {
         method: isEditing ? 'PUT' : 'POST',
@@ -55,7 +55,7 @@ export default function AdminAnnouncements() {
   const handleDelete = async (id: string) => {
     if (!confirm("Permanently delete this broadcast?")) return;
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/announcements/${id}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/announcements/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
       });

@@ -11,7 +11,7 @@ export default function StudentAnnouncements() {
   useEffect(() => {
     const fetchAndMarkRead = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/announcements`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/announcements`, {
           headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
         });
         const data = await res.json();
@@ -19,7 +19,7 @@ export default function StudentAnnouncements() {
         if (data.posts.length > 0) setActivePost(data.posts[0]); // Auto-select first
         
         // Silently mark as read so the notification dot clears
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/announcements/read`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/announcements/read`, {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` }
         });

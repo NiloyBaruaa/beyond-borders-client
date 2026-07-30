@@ -162,7 +162,7 @@ export default function OmniCMS() {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/landing-content`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/auth/landing-content`);
         const data = await res.json();
         if (data && Object.keys(data).length > 2) { 
             setForm((prev: any) => ({ ...prev, ...data }));
@@ -180,7 +180,7 @@ export default function OmniCMS() {
     e.preventDefault();
     setStatus('Publishing to Live Website...');
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/admin/landing-content`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://https://beyond-borders-server.onrender.com/api'}/api/admin/landing-content`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('bootcamp_token')}` },
         body: JSON.stringify(form)
