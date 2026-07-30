@@ -20,6 +20,18 @@ const config: Config = {
         sans: ['Inter', 'sans-serif'], // Clean, futuristic readability
       },
     },
+    keyframes: {
+        floatDiagonal: {
+          '0%': { top: '10%', left: '10%', transform: 'rotate(-10deg)' },
+          '25%': { top: '80%', left: '50%', transform: 'rotate(10deg)' },
+          '50%': { top: '30%', left: '80%', transform: 'rotate(-5deg)' },
+          '75%': { top: '70%', left: '20%', transform: 'rotate(5deg)' },
+          '100%': { top: '10%', left: '10%', transform: 'rotate(-10deg)' },
+        }
+      },
+      animation: {
+        'diagonal-float': 'floatDiagonal 20s linear infinite',
+      }
   },
   plugins: [],
 };

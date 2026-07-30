@@ -1,11 +1,24 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import WatermarkPlayer from '@/app/Components/WatermarkPlayer';
+
+// Helper to extract the 11-character YouTube ID from any link format
+const extractYouTubeId = (url: string) => {
+  if (!url) return "";
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : url; 
+};
 
 export default function Bookmarks() {
   const router = useRouter();
   const [savedVideos, setSavedVideos] = useState<any[]>([]);
+  const [studentEmail, setStudentEmail] = useState<string>("");
   const [loading, setLoading] = useState(true);
+  
+  // State for the Cinematic Overlay Modal
+  const [playingVideo, setPlayingVideo] = useState<any>(null);
 
   useEffect(() => {
     const token = localStorage.getItem('bootcamp_token');
@@ -13,12 +26,13 @@ export default function Bookmarks() {
 
     const fetchData = async () => {
       try {
-        // 1. Fetch user data to get bookmarked IDs
+        // 1. Fetch user data to get bookmarked IDs and Email
         const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/me`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const userData = await userRes.json();
         const bookmarkedIds = userData.bookmarkedVideos || [];
+        setStudentEmail(userData.email);
 
         // 2. Fetch all modules to find the matching videos
         const modRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/modules`, {
@@ -80,8 +94,8 @@ export default function Bookmarks() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {savedVideos.map((vid, idx) => (
                 <div key={idx} className="bg-cardBg border border-gray-800 rounded-xl overflow-hidden hover:border-primaryAccent transition group">
-                  <div className="aspect-video bg-[#111] flex items-center justify-center relative">
-                    <span className="text-4xl opacity-50 group-hover:scale-110 transition-transform">▶</span>
+                  <div className="aspect-video bg-[#111] flex items-center justify-center relative cursor-pointer" onClick={() => setPlayingVideo(vid)}>
+                    <span className="text-4xl opacity-50 group-hover:scale-110 transition-transform text-white">▶</span>
                     <div className="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-xs text-white">
                       {vid.duration || 'Video'}
                     </div>
@@ -89,8 +103,9 @@ export default function Bookmarks() {
                   <div className="p-5">
                     <span className="text-xs text-primaryAccent font-bold uppercase tracking-wider mb-1 block">Module {vid.moduleId}: {vid.moduleTitle}</span>
                     <h3 className="font-bold text-white text-lg line-clamp-2 mb-4">{vid.title}</h3>
+                    
                     <button 
-                      onClick={() => router.push(`/dashboard/class/${vid.moduleId}`)}
+                      onClick={() => setPlayingVideo(vid)}
                       className="w-full bg-darkBg border border-gray-700 hover:bg-gray-800 text-white py-2 rounded text-sm transition"
                     >
                       Watch Now
@@ -102,6 +117,34 @@ export default function Bookmarks() {
           )}
         </div>
       </main>
+
+      {/* THE CINEMATIC OVERLAY MODAL */}
+      {playingVideo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 md:p-12 animate-fade-in">
+          <div className="w-full max-w-5xl bg-darkBg border border-gray-800 rounded-2xl overflow-hidden shadow-2xl relative">
+            
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-4 border-b border-gray-800 bg-[#0a0a0a]">
+              <h3 className="font-bold text-white">{playingVideo.title}</h3>
+              <button 
+                onClick={() => setPlayingVideo(null)}
+                className="text-gray-400 hover:text-white bg-gray-800 hover:bg-gray-700 h-8 w-8 flex items-center justify-center rounded-full transition"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Modal Player */}
+            <div className="w-full bg-black">
+              <WatermarkPlayer 
+                youtubeId={extractYouTubeId(playingVideo.videoUrl)} 
+                email={studentEmail || "Student"} 
+              />
+            </div>
+            
+          </div>
+        </div>
+      )}
     </div>
   );
 }

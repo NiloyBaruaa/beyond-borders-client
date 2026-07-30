@@ -11,7 +11,7 @@ export default function StudentDashboard() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [hasUnread, setHasUnread] = useState(false);
   
-  // NEW: Tab State (Matches your screenshot)
+  // Tab State
   const [activeTab, setActiveTab] = useState<'course' | 'conceptual'>('course');
 
   useEffect(() => {
@@ -26,14 +26,14 @@ export default function StudentDashboard() {
         if (!userRes.ok) throw new Error("Not authorized");
         setStudent(await userRes.json());
 
-        // Fetch Smart Cohort Content (Modules AND Sessions)
+        // Fetch Modules and Sessions
         const contentRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/modules`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const contentData = await contentRes.json();
         
         setModules(contentData.modules.sort((a: any, b: any) => a.moduleId - b.moduleId));
-        setSessions(contentData.sessions); // Loaded from the smart route
+        setSessions(contentData.sessions); 
 
         const annRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/announcements`, {
           headers: { 'Authorization': `Bearer ${token}` }
@@ -49,16 +49,16 @@ export default function StudentDashboard() {
     fetchDashboardData();
   }, [router]);
 
-  if (loading) return <div className="min-h-screen bg-[#050505] flex items-center justify-center text-primaryAccent font-bold tracking-widest animate-pulse">INITIALIZING FLIGHT DECK...</div>;
+  if (loading) return <div className="min-h-screen bg-[#050505] flex items-center justify-center text-primaryAccent font-bold tracking-widest animate-pulse">LOADING...</div>;
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans flex flex-col">
       <header className="flex items-center justify-between px-8 py-4 bg-[#0a0a0a] border-b border-gray-800 sticky top-0 z-40 shadow-md">
         <div className="text-2xl font-bold tracking-wider text-white">
-          SWAN <span className="text-primaryAccent">BD</span>
+          SAWN <span className="text-primaryAccent">BD</span>
         </div>
         
-        {/* PROFILE DROPDOWN ENGINE (Kept exactly as we built it) */}
+        {/* Profile Dropdown */}
         <div className="relative">
           <div onClick={() => setIsProfileOpen(!isProfileOpen)} className="flex items-center gap-3 cursor-pointer hover:bg-gray-800/50 p-2 rounded-lg transition relative">
             {hasUnread && <span className="absolute top-1 left-1 h-3 w-3 bg-warningRed border-2 border-[#0a0a0a] rounded-full animate-pulse z-10"></span>}
@@ -79,7 +79,7 @@ export default function StudentDashboard() {
                   {student?.name?.charAt(0)}
                 </div>
                 <h4 className="font-bold text-white">{student?.name}</h4>
-                <p className="text-xs text-gray-500 mb-3">Recruit ID: BB-{student?._id?.substring(0, 4).toUpperCase()}</p>
+                <p className="text-xs text-gray-500 mb-3">ID: BB-{student?._id?.substring(0, 4).toUpperCase()}</p>
               </div>
               <ul className="flex flex-col text-sm text-gray-300">
                 <li onClick={() => {setIsProfileOpen(false); router.push('/dashboard/profile');}} className="px-6 py-3 hover:bg-gray-800 hover:text-primaryAccent cursor-pointer transition">Profile</li>
@@ -102,10 +102,10 @@ export default function StudentDashboard() {
         <div className="max-w-7xl mx-auto">
           
           <h1 className="text-2xl md:text-3xl font-extrabold mb-8 text-white">
-            Welcome Back <span className="text-primaryAccent">{student?.name?.split(' ')[0]}</span>, Ready For Your Next Lesson?
+            Welcome Back <span className="text-primaryAccent">{student?.name?.split(' ')[0]}</span>
           </h1>
 
-          {/* THE CUSTOM TAB NAVIGATION */}
+          {/* Tab Navigation */}
           <div className="flex border-b border-gray-800 mb-8">
             <button 
               onClick={() => setActiveTab('course')}
@@ -123,11 +123,11 @@ export default function StudentDashboard() {
             </button>
           </div>
 
-          {/* TAB 1: CURRICULUM GRID */}
+          {/* Tab 1: Course Grid */}
           {activeTab === 'course' && (
             <div className="animate-fade-in">
               {modules.length === 0 ? (
-                <div className="text-center text-gray-500 p-12 bg-cardBg rounded-xl border border-gray-800">No modules deployed for your cohort yet.</div>
+                <div className="text-center text-gray-500 p-12 bg-cardBg rounded-xl border border-gray-800">No modules deployed yet.</div>
               ) : (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {modules.map((mod) => {
@@ -152,11 +152,11 @@ export default function StudentDashboard() {
             </div>
           )}
 
-          {/* TAB 2: CONCEPTUAL SESSIONS */}
+          {/* Tab 2: Conceptual Sessions */}
           {activeTab === 'conceptual' && (
             <div className="animate-fade-in space-y-6 max-w-4xl">
               {sessions.length === 0 ? (
-                <div className="text-center text-gray-500 p-12 bg-cardBg rounded-xl border border-gray-800">No conceptual sessions scheduled for your cohort yet.</div>
+                <div className="text-center text-gray-500 p-12 bg-cardBg rounded-xl border border-gray-800">No conceptual sessions scheduled yet.</div>
               ) : (
                 sessions.map((session) => (
                   <div key={session._id} className="bg-cardBg border border-gray-800 rounded-2xl p-6 flex flex-col md:flex-row justify-between items-center gap-6 shadow-lg hover:border-primaryAccent transition-colors">
@@ -190,6 +190,21 @@ export default function StudentDashboard() {
               )}
             </div>
           )}
+
+          {/* Mentorship Scheduler Section */}
+          <section className="mt-16 border-t border-gray-800 pt-12 mb-12">
+            <div className="bg-cardBg border border-gray-800 rounded-2xl p-8 shadow-lg">
+              <h2 className="text-2xl font-bold mb-2">Book Your 1:1 Live Mock Interview</h2>
+              <p className="text-gray-400 mb-8">Select a time slot below to practice your embassy interview directly with Niloy.</p>
+              
+              <div className="w-full h-[600px] rounded-xl overflow-hidden bg-white">
+                <iframe 
+                  src="https://cal.com/niloy-baruaa/mock-interview" 
+                  className="w-full h-full border-none"
+                ></iframe>
+              </div>
+            </div>
+          </section>
 
         </div>
       </main>

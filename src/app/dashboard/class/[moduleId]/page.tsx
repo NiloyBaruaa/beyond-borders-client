@@ -1,6 +1,15 @@
 'use client';
 import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
+import WatermarkPlayer from '@/app/Components/WatermarkPlayer';
+
+// Helper to extract the 11-character YouTube ID from any link format
+const extractYouTubeId = (url: string) => {
+  if (!url) return "";
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : url; 
+};
 
 export default function Classroom({ params }: { params: Promise<{ moduleId: string }> }) {
   const router = useRouter();
@@ -9,14 +18,25 @@ export default function Classroom({ params }: { params: Promise<{ moduleId: stri
 
   const [moduleData, setModuleData] = useState<any>(null);
   const [activeVideo, setActiveVideo] = useState<any>(null);
+  const [studentEmail, setStudentEmail] = useState<string>("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('bootcamp_token');
     if (!token) return router.push('/');
 
-    const fetchModule = async () => {
+    const fetchModuleData = async () => {
       try {
+        // 1. Fetch the user to get their email for the Watermark
+        const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/me`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          setStudentEmail(userData.email);
+        }
+
+        // 2. Fetch the modules
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/modules`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -38,11 +58,10 @@ export default function Classroom({ params }: { params: Promise<{ moduleId: stri
         setLoading(false);
       }
     };
-    fetchModule();
+    fetchModuleData();
   }, [moduleId, router]);
 
   if (loading) return <div className="min-h-screen bg-[#050505] flex items-center justify-center text-primaryAccent animate-pulse">Loading Classroom...</div>;
-
   if (!moduleData) return <div className="min-h-screen bg-[#050505] flex items-center justify-center text-white">Module not found.</div>;
 
   return (
@@ -61,14 +80,12 @@ export default function Classroom({ params }: { params: Promise<{ moduleId: stri
         {/* MAIN VIDEO PLAYER */}
         <main className="flex-1 bg-black flex flex-col relative overflow-y-auto">
           {activeVideo ? (
-            <div className="w-full aspect-video bg-black">
-              <iframe 
-                src={activeVideo.videoUrl} 
-                title={activeVideo.title}
-                className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen
-              ></iframe>
+            <div className="w-full bg-black">
+              {/* THE NEW ANTI-PIRACY PLAYER */}
+              <WatermarkPlayer 
+                youtubeId={extractYouTubeId(activeVideo.videoUrl)} 
+                email={studentEmail || "Student"} 
+              />
             </div>
           ) : (
             <div className="w-full aspect-video bg-[#0a0a0a] flex items-center justify-center border-b border-gray-800">
@@ -94,7 +111,7 @@ export default function Classroom({ params }: { params: Promise<{ moduleId: stri
                     if (res.ok) alert("Bookmark status updated! (Check your Bookmark Library)");
                   } catch (e) {}
                 }}
-                className="bg-darkBg border border-gray-700 hover:border-primaryAccent text-white px-4 py-2 rounded flex items-center gap-2 transition"
+                className="bg-darkBg border border-gray-700 hover:border-primaryAccent text-white px-4 py-2 rounded flex items-center gap-2 transition shrink-0 ml-4"
               >
                 <span>⭐</span> Save to Library
               </button>
